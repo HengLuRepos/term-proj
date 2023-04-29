@@ -24,15 +24,15 @@ export default function GameCard({name, gameId, img_url, platforms, release_date
     <div className='card' onClick={handleCard}>
       <img src={img_url} alt='cover'/>
       <div className='card-body'>
-        <div>{names.length > 5 ? name.split(" ",5).join(" ") + "..." : names.join(" ")}</div>
-        <div>Release: {first_release_date ? first_release_date.human : "Unknown"}</div>
+        <div>{names.length >= 5 ? name.split(" ",5).join(" ") + "..." : names.join(" ")}</div>
+        <div>Release Date: {first_release_date ? first_release_date.human : "Unknown"}</div>
         <div>
           {ns>0 && <BsNintendoSwitch size={28}/>}
           {xbox>0 && <BsXbox size={28}/>}
           {ps>0 && <BsPlaystation size={28}/>}
           {pc>0 && <BsWindows size={28}/>}
         </div>
-        <button type='button' onClick={handleButton} className={tracking ? "tracking" : ""}><span>track</span></button>
+        <button type='button' onClick={(e) => handleButton(e,gameId)} className={tracking ? "tracking" : ""}><span>track</span></button>
       </div>
     </div>
   )

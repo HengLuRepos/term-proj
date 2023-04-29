@@ -9,6 +9,18 @@ export default function Search() {
   const [queryName, setQueryName] = useState("")
   const [queryState, setQueryState] = useState({})
   const [games, setGames] = useState([])
+
+  const [trackingId, setTrackingId] = useState(()=>{
+    const tracking = localStorage.getItem("tracking");
+    const ids = JSON.parse(tracking);
+    console.log(ids)
+    return ids || [];
+  })
+  const trackingSet = new Set(trackingId)
+  useEffect(() => {
+    localStorage.setItem("tracking",JSON.stringify(trackingId))
+  },[trackingId])
+
   //only triggers when queryName changes, otherwise just fliter games.
   useEffect(() => {
     getGame({name:queryName}).then(data => {
@@ -22,9 +34,14 @@ export default function Search() {
     })
   },[queryName])
 
-  const handleButton = (e) => {
+  const handleButton = (e,id) => {
     e.stopPropagation()
-    console.log("button!")
+    if(trackingSet.has(id)) {
+      trackingSet.delete(id)
+    } else {
+      trackingSet.add(id)
+    }
+    setTrackingId([...trackingSet])
   }
   const handleCard = () => {
     console.log("card!")
@@ -53,7 +70,7 @@ export default function Search() {
           handleButton={handleButton}
           handleCard={handleCard}
           platforms={game.platforms}
-          tracking={false}/>
+          tracking={trackingId.includes(game.id)}/>
         ))}
 
 
