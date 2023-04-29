@@ -1,4 +1,3 @@
-import { Container } from "react-bootstrap"
 import SearchField from "../components/SearchField"
 import { useState, useEffect } from "react"
 import getGame from "../utils/getGame"
@@ -12,7 +11,15 @@ export default function Search() {
   const [games, setGames] = useState([])
   //only triggers when queryName changes, otherwise just fliter games.
   useEffect(() => {
-    getGame({name:queryName}).then(data => setGames(data))
+    getGame({name:queryName}).then(data => {
+      data.forEach((game) => {
+        let urlArray = game.cover.url.split("/")
+        urlArray.splice(0,2)
+        urlArray[4] = 't_1080p'
+        game.cover.url = `https://${urlArray.join("/")}`
+      })
+      setGames(data)
+    })
   },[queryName])
 
   const handleButton = (e) => {
@@ -24,7 +31,7 @@ export default function Search() {
   }
 
   return (
-    <div className="body-content">
+    <>
       <SearchField
         name={name} 
         handleChange={(e) => setName(e.target.value)} 
@@ -36,19 +43,21 @@ export default function Search() {
         }}
       />
       <div className="result-field">
-        
-          <GameCard img_url={"https://images.igdb.com/igdb/image/upload/t_1080p/co3p2d.jpg"} 
-          name={"The Legend of Zelda: Breath of the Wild and The Legend of Zelda: Breath of the Wild Expansion Pass Bundle"} release_date={"08 Dec 2017"}
+        {games.map(game =>  (
+        <GameCard 
+          key={game.id}
+          gameId={game.id}
+          img_url={game.cover.url} 
+          name={game.name}
+          release_date={game.release_dates} 
           handleButton={handleButton}
           handleCard={handleCard}
+          platforms={game.platforms}
           tracking={false}/>
-          <GameCard img_url={"https://images.igdb.com/igdb/image/upload/t_1080p/co3p2d.jpg"} 
-          name={"The Legend of Zelda: Breath of the Wild and The Legend of Zelda: Breath of the Wild Expansion Pass Bundle"} release_date={"08 Dec 2017"}
-          handleButton={handleButton}
-          handleCard={handleCard}
-          tracking={true}/>
+        ))}
+
 
       </div>
-    </div>
+    </>
   )
 }

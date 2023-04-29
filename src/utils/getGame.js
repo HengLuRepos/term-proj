@@ -19,9 +19,10 @@ const getGame = async ({name}) => {
    */
   const dataField = `fields name, platforms.name, release_dates.platform, 
                       release_dates.human, release_dates.date, id, 
-                      total_rating, cover.url, genres.name; 
+                      cover.url; 
                       search "${name}"; 
-                      where release_dates.platform=${ALL_PLATFORM}; limit 120;`
+                      where release_dates.platform=${ALL_PLATFORM} 
+                      & parent_game = null & cover != null; limit 120;`
   const config = {
     method: 'post',
     maxBodyLength: Infinity,
@@ -38,6 +39,11 @@ const getGame = async ({name}) => {
 }
 
 const getDetails = async ({id}) => {
-
+  const dataField = `fields name, platforms.name, release_dates.platform, 
+                      release_dates.human, release_dates.date, id, 
+                      total_rating, cover.url, genres.name; 
+                      search "${name}"; 
+                      where release_dates.platform=${ALL_PLATFORM} 
+                      & parent_game = null; limit 120;`
 }
 export default getGame
