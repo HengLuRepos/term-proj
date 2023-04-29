@@ -1,0 +1,185 @@
+body {
+  display: flex;
+}
+header {
+  background-color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 0 25px 0 black;
+}
+
+header * {
+  display: inline-block;
+}
+
+header li {
+  margin: 20px;
+}
+
+header li a {
+  color: black;
+  text-decoration: none;
+}
+
+.body-content {
+  margin-top: 85px;
+  padding: 20px;
+  
+  
+}
+#searchGame {
+  margin-top: 85px;
+  padding: 20px;
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#searchGame input {
+  width: 60%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 10px;
+  box-shadow:0 0 4px rgba(0,0,0,0.3);
+  border: 1px solid #eee;
+}
+#searchGame div {
+  margin: 10px;
+  height: 100%;
+  display: inline;
+}
+#searchGame input:hover {
+  border: 1px solid #aaa;
+  box-shadow:0 0 4px rgba(0,0,0,0.5);
+}
+
+#searchGame button {
+  background-color: rgba(51, 51, 51, 0.05);
+  border-radius: 8px;
+  border-width: 0;
+  color: #333333;
+  cursor: pointer;
+  display: inline-block;
+  margin: 0;
+  padding: 10px 12px;
+}
+#searchGame button:hover {
+  box-shadow:0 0 4px rgba(0,0,0,0.5);
+}
+#searchGame + div {
+  margin-top: 85px;
+  padding: 20px;
+  justify-content: center;
+  width: 100%;
+}
+#searchGame > input ::placeholder {
+  font-size: small;
+}
+.card {
+  display: flex;
+  flex-direction: row;
+  width: 300px;
+  height: 200px;
+}
+
+.card img {
+  width: 150px;
+  height: 100%;
+  border-radius: 5px;
+}
+
+.card-body div:first-child {
+  font-weight: bold;
+}
+
+.card-body div:first-child + div {
+  font-weight: lighter;
+}
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.card-body div + button {
+  display: inline-block;
+  background-color: white;
+  font-size: small;
+  border-radius: 12px;
+  border: 2px solid deepskyblue;
+  color: deepskyblue;
+  text-transform: uppercase;
+}
+
+.card-body div + button::before {
+  content: "+";
+  font-weight: bold;
+  margin-right: 5px;
+  color: deepskyblue;
+}
+
+.card-body div + button:hover {
+  box-shadow: 0px 0px 2px 1px deepskyblue;
+}
+
+.card-body div + button[class~="tracking"] {
+  border-radius: 12px;
+  border: 2px solid grey;
+  color: grey;
+}
+
+.card-body div + button[class~="tracking"] span{
+  display: none;
+}
+.card-body div + button[class~="tracking"]::after {
+  content: "tracked";
+  text-transform: uppercase;
+
+}
+
+.card-body div + button[class~="tracking"]::before {
+  content: "\2714";
+  color: grey;
+}
+
+.card-body div + button[class~="tracking"]:hover {
+  border-radius: 12px;
+  border: 2px solid crimson;
+  color: crimson;
+  box-shadow: 0px 0px 2px 1px crimson;
+}
+
+.card-body div + button[class~="tracking"]:hover::before {
+  content: "-";
+  color: red;
+}
+.card-body div + button[class~="tracking"]:hover::after {
+  content: "untrack";
+  text-transform: uppercase;
+}
+.card-body div + div + div {
+  display: flex;
+  justify-content: flex-start;
+  gap: 2px;
+}
+.card:hover {
+  cursor: pointer;
+}
+.result-field{
+  
+  display: flex;
+  flex-basis: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+
+
