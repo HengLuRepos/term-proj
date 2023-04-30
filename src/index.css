@@ -227,6 +227,9 @@ header li a {
   right: 0px;
   top: 0px;
 }
-.upcoming-content .card .card-body {
-  width: 50%;
+
+@media (max-width:550px) {
+  .remaining {
+    display: none;
+  }
 }

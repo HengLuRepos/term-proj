@@ -4,3 +4,6 @@ export const changeUrl = (game) => {
   urlArray[4] = 't_1080p'
   game.cover.url = `https://${urlArray.join("/")}`
 }
+export const changeTimestamp = (game) => {
+  game.release_dates.filter((date) => date.date *= 1000)
+}

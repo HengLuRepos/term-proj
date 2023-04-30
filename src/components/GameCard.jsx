@@ -46,10 +46,6 @@ export default function GameCard({name,
         {trackButton && <button type='button' onClick={(e) => handleButton(e,gameId)} className={tracking ? "tracking" : ""}><span>track</span></button>}
         {deletable && <span><button type='button' onClick={(e) => handleDelete(e,gameId)} className='cross'><GiCrossedSwords /></button></span>}
       </div>
-      {deletable && 
-      <div className='remaining'>
-
-      </div>}
     </div>
   )
 }

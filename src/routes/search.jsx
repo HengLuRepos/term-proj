@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 import getGame from "../utils/getGame"
 import { ALL_PLATFORM } from "../utils/platform"
 import GameCard from "../components/GameCard"
-import { changeUrl } from "../utils/preprocess"
+import { changeTimestamp, changeUrl } from "../utils/preprocess"
 
 export default function Search() {
   const [name, setName] = useState("")
@@ -25,6 +25,7 @@ export default function Search() {
   useEffect(() => {
     getGame({name:queryName}).then(data => {
       data.forEach((game) => changeUrl(game))
+      data.forEach((game) => changeTimestamp(game))
       setGames(data)
     })
   },[queryName])

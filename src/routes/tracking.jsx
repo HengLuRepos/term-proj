@@ -2,7 +2,8 @@ import { useEffect, useState } from "react"
 import { AiFillCaretDown, AiFillCaretRight } from 'react-icons/ai'
 import GameCard from "../components/GameCard"
 import { getTracking } from "../utils/getGame"
-import { changeUrl } from "../utils/preprocess"
+import { changeTimestamp, changeUrl } from "../utils/preprocess"
+import { minBy } from "lodash"
 export default function Tracking() {
   const [upcoming, setUpcoming] = useState(true)
   const [released, setReleased] = useState(true)
@@ -15,6 +16,7 @@ export default function Tracking() {
   useEffect(() => {
     getTracking({id:trackingId}).then(data => {
       data.forEach((game) => changeUrl(game))
+      data.forEach((game) => changeTimestamp(game))
       setGames(data)
     })
   },[])
@@ -39,7 +41,10 @@ export default function Tracking() {
             {upcoming ? <AiFillCaretDown size={28} /> : <AiFillCaretRight size={28}/>} Upcoming
           </button>
           {upcoming && <div className="upcoming-content">
-          {games.map(game =>  (
+          {games.filter((game) => {
+            const first_release_date = minBy(game.release_dates,"date")
+            return first_release_date.date >= Date.now()
+          }).map(game =>  (
             <GameCard 
               key={game.id}
               gameId={game.id}
@@ -59,7 +64,10 @@ export default function Tracking() {
             {released ? <AiFillCaretDown size={28} /> : <AiFillCaretRight size={28}/>} Released
           </button>
           {released && <div className="released-content">
-          {games.map(game =>  (
+          {games.filter((game) => {
+            const first_release_date = minBy(game.release_dates,"date")
+            return first_release_date.date < Date.now()
+          }).map(game =>  (
             <GameCard 
               key={game.id}
               gameId={game.id}
