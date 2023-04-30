@@ -6,17 +6,17 @@ export default function Header() {
       <header>
         <nav>
           <li>
-            <NavLink to={`/`}>
+            <NavLink to={`${import.meta.env.BASE_URL}`}>
             <IoGameController size={28} />
             </NavLink>
           </li>
           <li>
-            <NavLink to={`search`}>
+            <NavLink to={`${import.meta.env.BASE_URL}search`}>
               Search
             </NavLink>
           </li>
           <li>
-            <NavLink to={`tracking`}>
+            <NavLink to={`${import.meta.env.BASE_URL}tracking`}>
               Tracking
             </NavLink>
           </li>

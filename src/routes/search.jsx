@@ -12,13 +12,13 @@ export default function Search() {
   const [games, setGames] = useState([])
 
   const [trackingId, setTrackingId] = useState(()=>{
-    const tracking = localStorage.getItem("tracking");
+    const tracking = sessionStorage.getItem("tracking");
     const ids = JSON.parse(tracking);
     return ids || [];
   })
   const trackingSet = new Set(trackingId)
   useEffect(() => {
-    localStorage.setItem("tracking",JSON.stringify(trackingId))
+    sessionStorage.setItem("tracking",JSON.stringify(trackingId))
   },[trackingId])
 
   //only triggers when queryName changes, otherwise just fliter games.

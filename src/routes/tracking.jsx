@@ -8,13 +8,13 @@ export default function Tracking() {
   const [upcoming, setUpcoming] = useState(true)
   const [released, setReleased] = useState(true)
   const [trackingId, setTrackingId] = useState(()=>{
-    const tracking = localStorage.getItem("tracking");
+    const tracking = sessionStorage.getItem("tracking");
     const ids = JSON.parse(tracking);
     return ids || [];
   })
   const [games, setGames] = useState([])
   useEffect(() => {
-    getTracking({id:trackingId}).then(data => {
+    trackingId.length !== 0 && getTracking({id:trackingId}).then(data => {
       data.forEach((game) => changeUrl(game))
       data.forEach((game) => changeTimestamp(game))
       setGames(data)
@@ -30,9 +30,10 @@ export default function Tracking() {
     e.stopPropagation()
     const trackingSet = new Set(trackingId)
     trackingSet.delete(id)
+    console.log(trackingSet)
     setTrackingId([...trackingSet])
     setGames(games.filter((game) => trackingSet.has(game.id)))
-    localStorage.setItem("tracking", JSON.stringify(trackingId))
+    sessionStorage.setItem("tracking", JSON.stringify(trackingId))
   }
   return (
     <>

@@ -15,8 +15,10 @@ export const changeScreenShot = (game) => {
     sc.url = `https://${urlArray.join("/")}`
   })
 }
+
 export default function preprocess(game) {
   if(game.cover) changeUrl(game);
   if(game.release_dates) changeTimestamp(game);
   if(game.screenshots) changeScreenShot(game);
+
 }
