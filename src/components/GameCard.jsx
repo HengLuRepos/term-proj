@@ -1,7 +1,18 @@
-import { BsSteam, BsXbox, BsPlaystation, BsNintendoSwitch, BsWindows } from 'react-icons/bs'
+import { BsXbox, BsPlaystation, BsNintendoSwitch, BsWindows } from 'react-icons/bs'
+import { GiCrossedSwords } from 'react-icons/gi'
 import { NINTENDO, XBOX, PLAYSTATION, PC } from '../utils/platform'
 import { minBy } from 'lodash'
-export default function GameCard({name, gameId, img_url, platforms, release_date, handleButton, handleCard, tracking}) {
+export default function GameCard({name, 
+  gameId, 
+  img_url, 
+  platforms, 
+  release_date, 
+  handleButton, 
+  handleCard, 
+  tracking, 
+  deletable,
+  handleDelete,
+  trackButton}) {
   const names = name.split(" ")
   const first_release_date = minBy(release_date,'date')
   const platformIds = platforms.map((plt) => plt.id)
@@ -24,7 +35,7 @@ export default function GameCard({name, gameId, img_url, platforms, release_date
     <div className='card' onClick={handleCard}>
       <img src={img_url} alt='cover'/>
       <div className='card-body'>
-        <div>{names.length >= 5 ? name.split(" ",5).join(" ") + "..." : names.join(" ")}</div>
+        <div>{name}</div>
         <div>Release Date: {first_release_date ? first_release_date.human : "Unknown"}</div>
         <div>
           {ns>0 && <BsNintendoSwitch size={28}/>}
@@ -32,12 +43,13 @@ export default function GameCard({name, gameId, img_url, platforms, release_date
           {ps>0 && <BsPlaystation size={28}/>}
           {pc>0 && <BsWindows size={28}/>}
         </div>
-        <button type='button' onClick={(e) => handleButton(e,gameId)} className={tracking ? "tracking" : ""}><span>track</span></button>
+        {trackButton && <button type='button' onClick={(e) => handleButton(e,gameId)} className={tracking ? "tracking" : ""}><span>track</span></button>}
+        {deletable && <span><button type='button' onClick={(e) => handleDelete(e,gameId)} className='cross'><GiCrossedSwords /></button></span>}
       </div>
+      {deletable && 
+      <div className='remaining'>
+
+      </div>}
     </div>
   )
-}
-
-export function TrackingCard() {
-
 }

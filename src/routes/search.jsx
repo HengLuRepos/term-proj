@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import getGame from "../utils/getGame"
 import { ALL_PLATFORM } from "../utils/platform"
 import GameCard from "../components/GameCard"
+import { changeUrl } from "../utils/preprocess"
 
 export default function Search() {
   const [name, setName] = useState("")
@@ -13,7 +14,6 @@ export default function Search() {
   const [trackingId, setTrackingId] = useState(()=>{
     const tracking = localStorage.getItem("tracking");
     const ids = JSON.parse(tracking);
-    console.log(ids)
     return ids || [];
   })
   const trackingSet = new Set(trackingId)
@@ -24,12 +24,7 @@ export default function Search() {
   //only triggers when queryName changes, otherwise just fliter games.
   useEffect(() => {
     getGame({name:queryName}).then(data => {
-      data.forEach((game) => {
-        let urlArray = game.cover.url.split("/")
-        urlArray.splice(0,2)
-        urlArray[4] = 't_1080p'
-        game.cover.url = `https://${urlArray.join("/")}`
-      })
+      data.forEach((game) => changeUrl(game))
       setGames(data)
     })
   },[queryName])
@@ -69,6 +64,7 @@ export default function Search() {
           release_date={game.release_dates} 
           handleButton={handleButton}
           handleCard={handleCard}
+          trackButton={true}
           platforms={game.platforms}
           tracking={trackingId.includes(game.id)}/>
         ))}

@@ -7,6 +7,7 @@ import ErrorPage from './ErrorPage'
 import Index from './routes'
 import Search from './routes/search'
 import Tracking from './routes/tracking'
+import GameDetails from './routes/gameDetails'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "tracking",
         element: <Tracking />
+      },
+      {
+        path: "games/:gameid",
+        element: <GameDetails />
       }
     ]
   },

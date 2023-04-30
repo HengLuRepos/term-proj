@@ -1,6 +1,3 @@
-body {
-  display: flex;
-}
 header {
   background-color: white;
   position: fixed;
@@ -95,6 +92,10 @@ header li a {
 
 .card-body div:first-child {
   font-weight: bold;
+  text-overflow: ellipsis;
+  overflow: hidden !important;
+  max-width: 200px;
+  max-height: 50px;
 }
 
 .card-body div:first-child + div {
@@ -138,7 +139,6 @@ header li a {
 .card-body div + button[class~="tracking"]::after {
   content: "tracked";
   text-transform: uppercase;
-
 }
 
 .card-body div + button[class~="tracking"]::before {
@@ -178,4 +178,55 @@ header li a {
 }
 
 
+.upcoming > button {
+  background-color: white;
+  font-size: 28px;
+  border: none;
+  cursor: pointer;
+}
 
+.released > button {
+  background-color: white;
+  font-size: 28px;
+  border: none;
+  cursor: pointer;
+}
+
+.upcoming {
+  margin-top: 85px;
+}
+.released {
+  position: relative;
+  top: 20px;
+}
+.upcoming-content{
+  display: flex;
+  justify-content: center;
+  flex-flow: row wrap;
+  padding: 20px;
+  gap: 10px;
+}
+.released-content{
+  display: flex;
+  justify-content: center;
+  flex-flow: row wrap;
+  padding: 20px;
+  gap: 10px;
+}
+.upcoming-content .card {
+  width: 100%;
+}
+.released-content .card {
+  width: 100%;
+}
+.cross {
+  background-color: white;
+  display: inline;
+  border: none;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+.upcoming-content .card .card-body {
+  width: 50%;
+}

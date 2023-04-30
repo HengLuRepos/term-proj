@@ -38,12 +38,24 @@ const getGame = async ({name}) => {
   return data
 }
 
-const getDetails = async ({id}) => {
+export const getTracking = async ({id}) => {
   const dataField = `fields name, platforms.name, release_dates.platform, 
                       release_dates.human, release_dates.date, id, 
-                      total_rating, cover.url, genres.name; 
-                      search "${name}"; 
-                      where release_dates.platform=${ALL_PLATFORM} 
-                      & parent_game = null; limit 120;`
+                      cover.url;
+                      where id = (${id.join(',')}) & release_dates.platform=${ALL_PLATFORM} 
+                      & parent_game = null & cover != null; limit 120;`
+  const config = {
+    method: 'post',
+    maxBodyLength: Infinity,
+    url: IGDB,
+    headers: {
+      ...headers,
+      'Content-Type': 'text/plain',
+    },
+    data: dataField
+  };
+  let response = await axios.request(config);
+  let data = await response.data
+  return data
 }
 export default getGame
