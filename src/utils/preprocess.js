@@ -19,6 +19,12 @@ export const changeScreenShot = (game) => {
 export const getWebsite = (game) => {
   game.website = minBy(game.websites, 'category')
 }
+export const changeScreenShotURL = (url) => {
+    let urlArray = url.split("/")
+    urlArray.splice(0,2)
+    urlArray[4] = 't_1080p'
+    return `https://${urlArray.join("/")}`
+}
 export default function preprocess(game) {
   if(game.cover) changeUrl(game);
   if(game.release_dates) changeTimestamp(game);

@@ -2,6 +2,7 @@ import { BsXbox, BsPlaystation, BsNintendoSwitch, BsWindows } from 'react-icons/
 import { GiCrossedSwords } from 'react-icons/gi'
 import { NINTENDO, XBOX, PLAYSTATION, PC } from '../utils/platform'
 import { minBy } from 'lodash'
+import { useNavigate } from 'react-router-dom'
 export default function GameCard({name, 
   gameId, 
   img_url, 
@@ -13,7 +14,7 @@ export default function GameCard({name,
   deletable,
   handleDelete,
   trackButton}) {
-  const names = name.split(" ")
+  const navigate = useNavigate()
   const first_release_date = minBy(release_date,'date')
   const platformIds = platforms.map((plt) => plt.id)
   let [ns, xbox, ps, pc] = [0,0,0,0]
@@ -32,7 +33,7 @@ export default function GameCard({name,
     }
   })
   return(
-    <div className='card' onClick={handleCard}>
+    <div className='card' onClick={() => navigate(`${import.meta.env.BASE_URL}games/${gameId}`)}>
       <img src={img_url} alt='cover'/>
       <div className='card-body'>
         <div>{name}</div>

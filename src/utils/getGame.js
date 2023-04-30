@@ -79,10 +79,10 @@ export const getSlider = async ({id}) => {
   return data
 }
 export const getDetails = async({id}) => {
-  const dataField = `fields name, genres.*,websites.*,
+  const dataField = `fields name, genres.*,videos.*,websites.*, platforms.name,
                       release_dates.human, release_dates.date, id, 
                       screenshots.*,cover.url,storyline, summary;
-                      where id = (id) & release_dates.platform=${ALL_PLATFORM} 
+                      where id = (${id}) & release_dates.platform=${ALL_PLATFORM} 
                       & parent_game = null & cover != null; limit 120;`
   const config = {
     method: 'post',

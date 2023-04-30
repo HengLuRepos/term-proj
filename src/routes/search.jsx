@@ -5,12 +5,13 @@ import { ALL_PLATFORM } from "../utils/platform"
 import GameCard from "../components/GameCard"
 import { changeTimestamp, changeUrl } from "../utils/preprocess"
 import { orderBy,minBy } from "lodash"
+import { useNavigate } from "react-router-dom"
 export default function Search() {
   const [name, setName] = useState("")
   const [queryName, setQueryName] = useState("")
   const [queryState, setQueryState] = useState({})
   const [games, setGames] = useState([])
-
+  const navigate = useNavigate()
   const [trackingId, setTrackingId] = useState(()=>{
     const tracking = sessionStorage.getItem("tracking");
     const ids = JSON.parse(tracking);
@@ -39,8 +40,8 @@ export default function Search() {
     }
     setTrackingId([...trackingSet])
   }
-  const handleCard = () => {
-    console.log("card!")
+  const handleCard = (id) => {
+    navigate(`games/${id}`)
   }
 
   return (
@@ -74,7 +75,8 @@ export default function Search() {
           handleCard={handleCard}
           trackButton={true}
           platforms={game.platforms}
-          tracking={trackingId.includes(game.id)}/>
+          tracking={trackingId.includes(game.id)}
+          />
         ))}
 
 

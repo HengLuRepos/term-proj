@@ -4,9 +4,11 @@ import GameCard from "../components/GameCard"
 import { getTracking } from "../utils/getGame"
 import { changeTimestamp, changeUrl } from "../utils/preprocess"
 import { minBy } from "lodash"
+import { useNavigate } from "react-router-dom"
 export default function Tracking() {
   const [upcoming, setUpcoming] = useState(true)
   const [released, setReleased] = useState(true)
+  const navigate = useNavigate()
   const [trackingId, setTrackingId] = useState(()=>{
     const tracking = sessionStorage.getItem("tracking");
     const ids = JSON.parse(tracking);
@@ -35,6 +37,9 @@ export default function Tracking() {
     setGames(games.filter((game) => trackingSet.has(game.id)))
     sessionStorage.setItem("tracking", JSON.stringify(trackingId))
   }
+  const handleClick = (id) => {
+    navigate(`games/${id}`)
+  }
   return (
     <>
         <div className="upcoming">
@@ -56,7 +61,8 @@ export default function Tracking() {
               tracking={trackingId.includes(game.id)}
               trackButton={false}
               deletable={true}
-              handleDelete={handleDelete}/>
+              handleDelete={handleDelete}
+              onClick={() => navigate(`games/${game.id}`)}/>
             ))}
           </div>}
         </div>
@@ -79,7 +85,9 @@ export default function Tracking() {
               tracking={trackingId.includes(game.id)}
               trackButton={false}
               deletable={true}
-              handleDelete={handleDelete}/>
+              handleDelete={handleDelete}
+              handleCard={handleClick}
+              />
             ))}
           </div>} 
         </div>

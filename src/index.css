@@ -8,7 +8,7 @@ header {
   display: flex;
   align-items: center;
   box-shadow: 0 0 25px 0 black;
-  z-index: 1;
+  z-index: 3;
 }
 
 header * {
@@ -25,6 +25,7 @@ header li a {
 }
 .body-content {
   margin-top: 85px;
+  padding: 10px;
 }
 #searchGame {
   margin-top: 85px;
@@ -235,7 +236,6 @@ header li a {
 }
 .carousel {
   width: 60%;
-  height: 50%;
   align-self: center;
   margin-top: 90px;
   margin-left: 20%;
@@ -255,3 +255,9 @@ header li a {
 .details {
   padding: 20px;
 }
+h3 + .carousel {
+  margin-top: 0px;
+  padding: 10px;
+  text-align: center;
+}
+
