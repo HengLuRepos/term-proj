@@ -4,7 +4,7 @@ import getGame from "../utils/getGame"
 import { ALL_PLATFORM } from "../utils/platform"
 import GameCard from "../components/GameCard"
 import { changeTimestamp, changeUrl } from "../utils/preprocess"
-
+import { orderBy,minBy } from "lodash"
 export default function Search() {
   const [name, setName] = useState("")
   const [queryName, setQueryName] = useState("")
@@ -56,7 +56,14 @@ export default function Search() {
         }}
       />
       <div className="result-field">
-        {games.map(game =>  (
+        {orderBy(games,(game) => {
+          game.release_dates.map((date) => {
+            if(!date.date) {
+              date.date = 0
+            }
+          } )
+          return minBy(game.release_dates,'date').date
+        },"desc").map(game =>  (
         <GameCard 
           key={game.id}
           gameId={game.id}

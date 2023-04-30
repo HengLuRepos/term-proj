@@ -11,7 +11,8 @@ export default function GameDetails() {
   const { games } = useLoaderData()
   
   return (
-    <>
-    </>
+    <div className="body-content details">
+      <h3>Hi</h3>
+    </div>
   )
 }
