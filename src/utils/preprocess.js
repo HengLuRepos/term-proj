@@ -1,3 +1,4 @@
+import { minBy } from 'lodash'
 export const changeUrl = (game) => {
   let urlArray = game.cover.url.split("/")
   urlArray.splice(0,2)
@@ -15,10 +16,13 @@ export const changeScreenShot = (game) => {
     sc.url = `https://${urlArray.join("/")}`
   })
 }
-
+export const getWebsite = (game) => {
+  game.website = minBy(game.websites, 'category')
+}
 export default function preprocess(game) {
   if(game.cover) changeUrl(game);
   if(game.release_dates) changeTimestamp(game);
   if(game.screenshots) changeScreenShot(game);
+  if(game.websites) getWebsite(game);
 
 }
