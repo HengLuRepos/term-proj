@@ -16,22 +16,27 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        index: true,
-        element: <Index />,
-        loader: indexLoader
-      },
-      {
-        path: `${import.meta.env.BASE_URL}search`,
-        element: <Search />
-      },
-      {
-        path: `${import.meta.env.BASE_URL}tracking`,
-        element: <Tracking />
-      },
-      {
-        path: `${import.meta.env.BASE_URL}games/:gameid`,
-        element: <GameDetails />,
-        loader: gameLoader
+        errorElement: <ErrorPage />,
+        children: [
+          {
+            index: true,
+            element: <Index />,
+            loader: indexLoader
+          },
+          {
+            path: `${import.meta.env.BASE_URL}search`,
+            element: <Search />
+          },
+          {
+            path: `${import.meta.env.BASE_URL}tracking`,
+            element: <Tracking />
+          },
+          {
+            path: `${import.meta.env.BASE_URL}games/:gameid`,
+            element: <GameDetails />,
+            loader: gameLoader
+          }
+        ]
       }
     ]
   },
