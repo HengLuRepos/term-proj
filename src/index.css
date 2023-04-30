@@ -233,3 +233,22 @@ header li a {
     display: none;
   }
 }
+.carousel {
+  width: 60%;
+  height: 50%;
+  align-self: center;
+  margin-top: 90px;
+  margin-left: 20%;
+  display: flex;
+}
+
+
+@media (max-width: 900px) {
+  .carousel {
+    width:auto;
+    height:auto;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 50%;
+  }
+}

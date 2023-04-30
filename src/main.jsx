@@ -8,6 +8,7 @@ import Index from './routes'
 import Search from './routes/search'
 import Tracking from './routes/tracking'
 import GameDetails from './routes/gameDetails'
+import {loader as indexLoader} from './routes/index'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -16,7 +17,8 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Index />
+        element: <Index />,
+        loader: indexLoader
       },
       {
         path: "search",

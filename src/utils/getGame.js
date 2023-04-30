@@ -58,4 +58,24 @@ export const getTracking = async ({id}) => {
   let data = await response.data
   return data
 }
+export const getSlider = async ({id}) => {
+  const dataField = `fields name, 
+                      release_dates.human, release_dates.date, id, 
+                      screenshots.*;
+                      where id = (${id.join(',')}) & release_dates.platform=${ALL_PLATFORM} 
+                      & parent_game = null & cover != null; limit 120;`
+  const config = {
+    method: 'post',
+    maxBodyLength: Infinity,
+    url: IGDB,
+    headers: {
+      ...headers,
+      'Content-Type': 'text/plain',
+    },
+    data: dataField
+  };
+  let response = await axios.request(config);
+  let data = await response.data
+  return data
+}
 export default getGame
