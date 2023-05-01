@@ -38,7 +38,7 @@ export default function GameDetails() {
       <p>{game.summary}</p>
       <p>Release Date: {first_release_date ? first_release_date.human : "Unknown"}</p>
       <p>Platforms: {game.platforms.map((plt) => plt.name)}</p>
-      {game.websites && <a href={minBy(game.websites, 'category').url}>Official Website</a>}
+      {game.websites && <a href={minBy(game.websites, 'category').url} target="_blank">Official Website</a>}
       {game.storyline && 
       (<>
         <h3>Storyline</h3>
