@@ -32,9 +32,6 @@ export default function GameDetails() {
   const handleEnd = () => {
     setVideo((video + 1) % game.videos.length)
   }
-  window.YTConfig = {
-    host: 'https://www.youtube.com' 
-  } 
   return (
     <div className="body-content">
       <h2>{game.name}</h2>
