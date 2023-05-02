@@ -32,14 +32,13 @@ export default function Tracking() {
     e.stopPropagation()
     const trackingSet = new Set(trackingId)
     trackingSet.delete(id)
-    console.log(trackingSet)
     setTrackingId([...trackingSet])
+  }
+  useEffect(() => {
+    const trackingSet = new Set(trackingId)
     setGames(games.filter((game) => trackingSet.has(game.id)))
     sessionStorage.setItem("tracking", JSON.stringify(trackingId))
-    if(trackingId.length === 1) {
-      sessionStorage.removeItem("tracking")
-    }
-  }
+  },[trackingId])
   const handleClick = (id) => {
     navigate(`games/${id}`)
   }
