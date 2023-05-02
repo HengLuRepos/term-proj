@@ -36,6 +36,9 @@ export default function Tracking() {
     setTrackingId([...trackingSet])
     setGames(games.filter((game) => trackingSet.has(game.id)))
     sessionStorage.setItem("tracking", JSON.stringify(trackingId))
+    if(trackingId.length === 1) {
+      sessionStorage.removeItem("tracking")
+    }
   }
   const handleClick = (id) => {
     navigate(`games/${id}`)
